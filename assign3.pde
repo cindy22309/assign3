@@ -105,8 +105,8 @@ void setBombs(){
 for(int bomb=0;bomb<bombCount;bomb++){
  int xx= int(random(4));
  int yy= int(random(4));
- if(slot[xx][yy]==SLOT_OFF){
- slot[xx][yy]=SLOT_BOMB;
+ if(slot[(int)xx][(int)yy]==SLOT_OFF){
+ slot[(int)xx][(int)yy]=SLOT_BOMB;
 }
 else {
 bomb=bomb-1;
@@ -197,12 +197,12 @@ void mousePressed(){
  int col= (int)(mouseX-ix)/SLOT_SIZE;
  int row= (int)(mouseY-iy)/SLOT_SIZE;
  
-if(slot[col][row]==SLOT_BOMB){
-showSlot(col, row, SLOT_DEAD);
+if(slot[(int)col][(int)row]==SLOT_BOMB){
+showSlot((int)col, (int)row, SLOT_DEAD);
 gameState=GAME_LOSE;
 
  }else{
-   showSlot(col,row,SLOT_SAFE);
+   showSlot((int)col,(int)row,SLOT_SAFE);
    clickCount=clickCount+1;
 }
   
