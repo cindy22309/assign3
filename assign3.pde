@@ -67,7 +67,12 @@ void draw(){
           break;
     case GAME_RUN:
           //---------------- put you code here ----
+           if ((int)clickCount==(int)16-bombCount){
+               gameState=GAME_WIN;}
 
+  
+          
+             
           // -----------------------------------
           break;
     case GAME_WIN:
@@ -96,10 +101,25 @@ void setBombs(){
     }
   }
   // -------------- put your code here ---------
-  // randomly set bombs
+  // randomly set bombs 
+for(int bomb=0;bomb<bombCount;bomb++){
+ int xx= int(random(4));
+ int yy= int(random(4));
+ if(slot[xx][yy]==SLOT_OFF){
+ slot[xx][yy]=SLOT_BOMB;
+}
+else {
+bomb=bomb-1;
+}
+ }
+ 
+}
+    
+  
+
 
   // ---------------------------------------
-}
+
 
 void drawEmptySlots(){
   background(180);
@@ -174,11 +194,24 @@ void mousePressed(){
        mouseY >= iy && mouseY <= iy+sideLength){
     
     // --------------- put you code here -------     
+ int col= (int)(mouseX-ix)/SLOT_SIZE;
+ int row= (int)(mouseY-iy)/SLOT_SIZE;
+ 
+if(slot[col][row]==SLOT_BOMB){
+showSlot(col, row, SLOT_DEAD);
+gameState=GAME_LOSE;
+
+ }else{
+   showSlot(col,row,SLOT_SAFE);
+   clickCount=clickCount+1;
+}
+  
 
     // -------------------------
     
   }
 }
+
 
 // press enter to start
 void keyPressed(){
